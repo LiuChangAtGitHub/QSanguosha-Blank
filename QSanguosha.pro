@@ -114,7 +114,6 @@ SOURCES += \
     src/package/yjcm2012.cpp \
     src/package/yjcm2013.cpp \
     src/package/yjcm2014.cpp \
-    src/package/yjcm2015.cpp \
     swig/sanguosha_wrap.cxx \
     src/dialog/banipdialog.cpp \
     src/dialog/mainwindowserverlist.cpp \
@@ -210,7 +209,6 @@ HEADERS += \
     src/package/yjcm2012.h \
     src/package/yjcm2013.h \
     src/package/yjcm2014.h \
-    src/package/yjcm2015.h \
     src/core/room-state.h \
     src/core/wrapped-card.h \
     src/ui/bubblechatbox.h \
