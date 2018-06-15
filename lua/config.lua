@@ -55,8 +55,6 @@ config = {
 		"Special1v1Ext",
 		"SP",
 		"OL",
-		"TaiwanSP",
-		"TaiwanYJCM" ,
 		"Miscellaneous",
 		"Hegemony",
 		"HegemonySP",
