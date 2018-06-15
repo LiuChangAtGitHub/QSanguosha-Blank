@@ -37,7 +37,6 @@ config = {
 		"Disaster",
 		"JoyEquip",
 
-		"Standard",
 		"Test"
 	},
 

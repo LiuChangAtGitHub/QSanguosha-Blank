@@ -52,7 +52,6 @@ SOURCES += \
     src/package/standard.cpp \
     src/package/standard-cards.cpp \
     src/package/standard-generals.cpp \
-    src/package/standard-skillcards.cpp \
     src/package/wind.cpp \
     src/scenario/couple-scenario.cpp \
     src/scenario/miniscenarios.cpp \
@@ -147,7 +146,6 @@ HEADERS += \
     src/package/package.h \
     src/package/standard.h \
     src/package/standard-equips.h \
-    src/package/standard-skillcards.h \
     src/scenario/couple-scenario.h \
     src/scenario/miniscenarios.h \
     src/scenario/scenario.h \

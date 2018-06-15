@@ -537,8 +537,6 @@ QString Treasure::getCommonEffectName() const
 StandardPackage::StandardPackage()
     : Package("standard")
 {
-    addGenerals();
-
     patterns["."] = new ExpPattern(".|.|.|hand");
     patterns[".S"] = new ExpPattern(".|spade|.|hand");
     patterns[".C"] = new ExpPattern(".|club|.|hand");
