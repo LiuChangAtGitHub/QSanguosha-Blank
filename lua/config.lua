@@ -42,7 +42,6 @@ config = {
 		"Fire",
 		"Thicket",
 		"Mountain",
-		"God",
 		"JianGeDefense",
 		"BossMode",
 		"Test"

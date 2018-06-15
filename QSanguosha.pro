@@ -46,7 +46,6 @@ SOURCES += \
     src/dialog/roleassigndialog.cpp \
     src/dialog/scenario-overview.cpp \
     src/package/exppattern.cpp \
-    src/package/god.cpp \
     src/package/maneuvering.cpp \
     src/package/nostalgia.cpp \
     src/package/package.cpp \
@@ -148,7 +147,6 @@ HEADERS += \
     src/dialog/roleassigndialog.h \
     src/dialog/scenario-overview.h \
     src/package/exppattern.h \
-    src/package/god.h \
     src/package/maneuvering.h \
     src/package/nostalgia.h \
     src/package/package.h \
