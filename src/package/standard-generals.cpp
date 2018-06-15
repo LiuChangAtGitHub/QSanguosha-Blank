@@ -862,8 +862,6 @@ public:
         int index = qrand() % 2 + 1;
         if (Player::isNostalGeneral(player, "guanyu"))
             index += 2;
-        else if (player->getGeneralName() == "jsp_guanyu" || (player->getGeneralName() != "guanyu" && player->getGeneral2Name() == "jsp_guanyu"))
-            index += 4;
         else if (player->getGeneralName() == "guansuo" || (player->getGeneralName() != "guanyu" && player->getGeneral2Name() == "guansuo"))
             index = 7;
 

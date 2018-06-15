@@ -65,7 +65,6 @@ config = {
 		"HFormation",
 		"HMomentum",
 		"HegemonySP",
-		"JSP",
 		"JianGeDefense",
 		"BossMode",
 		"Test"

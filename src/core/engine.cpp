@@ -67,7 +67,7 @@ struct ManualSkill
         : skill(skill),
           baseName(skill->objectName().split("_").last())
     {
-        static const QString prefixes[] = { "boss", "gd", "jg", "jsp", "kof", "neo", "nos", "ol", "sp", "tw", "vs", "yt", "diy" };
+        static const QString prefixes[] = { "boss", "gd", "jg", "kof", "neo", "ol", "sp", "tw", "vs", "yt", "diy" };
 
         for (int i = 0; i < sizeof(prefixes) / sizeof(QString); ++i) {
             QString prefix = prefixes[i];
