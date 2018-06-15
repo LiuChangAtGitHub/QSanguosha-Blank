@@ -41,7 +41,6 @@ config = {
 		"Wind",
 		"Fire",
 		"Thicket",
-		"Mountain",
 		"JianGeDefense",
 		"BossMode",
 		"Test"
