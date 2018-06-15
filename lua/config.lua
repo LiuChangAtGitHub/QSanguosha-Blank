@@ -62,7 +62,6 @@ config = {
 		"BGMDIY",
 		"Ling",
 		"Hegemony",
-		"HFormation",
 		"HegemonySP",
 		"JianGeDefense",
 		"BossMode",
