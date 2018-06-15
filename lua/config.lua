@@ -45,7 +45,6 @@ config = {
 		"God",
 		"YJCM",
 		"YJCM2012",
-		"YJCM2013",
 		"JianGeDefense",
 		"BossMode",
 		"Test"
