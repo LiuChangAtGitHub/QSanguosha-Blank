@@ -43,7 +43,6 @@ config = {
 		"Thicket",
 		"Mountain",
 		"God",
-		"YJCM",
 		"JianGeDefense",
 		"BossMode",
 		"Test"

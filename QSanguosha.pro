@@ -110,7 +110,6 @@ SOURCES += \
     src/package/special1v1.cpp \
     src/package/special3v3.cpp \
     src/package/yitian.cpp \
-    src/package/yjcm.cpp \
     swig/sanguosha_wrap.cxx \
     src/dialog/banipdialog.cpp \
     src/dialog/mainwindowserverlist.cpp \
@@ -202,7 +201,6 @@ HEADERS += \
     src/package/special1v1.h \
     src/package/special3v3.h \
     src/package/yitian.h \
-    src/package/yjcm.h \
     src/core/room-state.h \
     src/core/wrapped-card.h \
     src/ui/bubblechatbox.h \
