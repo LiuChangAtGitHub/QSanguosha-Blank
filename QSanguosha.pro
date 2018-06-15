@@ -98,7 +98,6 @@ SOURCES += \
     src/ui/table-pile.cpp \
     src/ui/timed-progressbar.cpp \
     src/ui/ui-utils.cpp \
-    src/package/boss.cpp \
     src/package/joy.cpp \
     src/package/mountain.cpp \
     src/package/sp.cpp \
@@ -185,7 +184,6 @@ HEADERS += \
     src/util/socket.h \
     src/core/record-analysis.h \
     src/scenario/fancheng-scenario.h \
-    src/package/boss.h \
     src/package/joy.h \
     src/package/mountain.h \
     src/package/sp.h \

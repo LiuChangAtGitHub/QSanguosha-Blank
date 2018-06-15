@@ -39,7 +39,6 @@ config = {
 
 		"Standard",
 		"Wind",
-		"BossMode",
 		"Test"
 	},
 
