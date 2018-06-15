@@ -38,7 +38,6 @@ config = {
 		"JoyEquip",
 
 		"Standard",
-		"Wind",
 		"Test"
 	},
 
