@@ -66,11 +66,6 @@ config = {
 		"HMomentum",
 		"HegemonySP",
 		"JSP",
-		"NostalStandard",
-		"NostalWind",
-		"NostalYJCM",
-		"NostalYJCM2012",
-		"NostalYJCM2013",
 		"JianGeDefense",
 		"BossMode",
 		"Test"
