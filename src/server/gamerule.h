@@ -10,16 +10,6 @@ class GameRule : public TriggerSkill
     Q_OBJECT
 
 public:
-    enum BossModeDifficulty
-    {
-        BMDRevive,
-        BMDRecover,
-        BMDDraw,
-        BMDReward,
-        BMDIncMaxHp,
-        BMDDecMaxHp
-    };
-
     GameRule(QObject *parent);
     virtual bool triggerable(const ServerPlayer *target) const;
     virtual int getPriority(TriggerEvent triggerEvent) const;
@@ -30,9 +20,6 @@ private:
     void rewardAndPunish(ServerPlayer *killer, ServerPlayer *victim) const;
     void changeGeneral1v1(ServerPlayer *player) const;
     void changeGeneralXMode(ServerPlayer *player) const;
-    void changeGeneralBossMode(ServerPlayer *player) const;
-    void acquireBossSkills(ServerPlayer *player, int level) const;
-    void doBossModeDifficultySettings(ServerPlayer *lord) const;
     QString getWinner(ServerPlayer *victim) const;
 };
 

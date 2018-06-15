@@ -19,7 +19,6 @@
 #include "miniscenarios.h"
 
 #include "couple-scenario.h"
-#include "boss-mode-scenario.h"
 #include "fancheng-scenario.h"
 
 Engine *Sanguosha = NULL;
@@ -49,7 +48,6 @@ void Engine::_loadModScenarios()
 {
     addScenario(new CoupleScenario());
     addScenario(new FanchengScenario());
-    addScenario(new ImpasseScenario());
 }
 
 void Engine::addPackage(const QString &name)
@@ -67,7 +65,7 @@ struct ManualSkill
         : skill(skill),
           baseName(skill->objectName().split("_").last())
     {
-        static const QString prefixes[] = { "boss", "gd", "jg", "vs" };
+        static const QString prefixes[] = { "gd" };
 
         for (int i = 0; i < sizeof(prefixes) / sizeof(QString); ++i) {
             QString prefix = prefixes[i];
@@ -318,7 +316,6 @@ Engine::Engine(bool isManualMode)
     modes["03p"] = tr("3 players");
     modes["04p"] = tr("4 players");
     modes["04_1v3"] = tr("4 players (Hulao Pass)");
-    modes["04_boss"] = tr("4 players(Boss)");
     modes["05p"] = tr("5 players");
     modes["06p"] = tr("6 players");
     modes["06pd"] = tr("6 players (2 renegades)");
@@ -1052,7 +1049,7 @@ QString Engine::getRoles(const QString &mode) const
 
     if (mode == "02_1v1") {
         return "ZN";
-    } else if (mode == "04_1v3" || mode == "04_boss") {
+    } else if (mode == "04_1v3") {
         return "ZFFF";
     }
 
@@ -1250,8 +1247,6 @@ QStringList Engine::getRandomGenerals(int count, const QSet<QString> &ban_set, c
         general_set = general_set.subtract(Config.value("Banlist/Basara", "").toStringList().toSet());
     if (Config.EnableHegemony)
         general_set = general_set.subtract(Config.value("Banlist/Hegemony", "").toStringList().toSet());
-    if (ServerInfo.GameMode == "04_boss")
-        general_set = general_set.subtract(Config.value("Banlist/BossMode", "").toStringList().toSet());
 
     if (isNormalGameMode(ServerInfo.GameMode)
         || ServerInfo.GameMode.contains("_mini_")
