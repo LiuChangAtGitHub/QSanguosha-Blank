@@ -51,8 +51,6 @@ config = {
 		"Assassins",
 		"Special3v3",
 		"Special3v3Ext",
-		"Special1v1",
-		"Special1v1Ext",
 		"JianGeDefense",
 		"BossMode",
 		"Test"
