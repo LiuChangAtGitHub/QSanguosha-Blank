@@ -53,7 +53,6 @@ SOURCES += \
     src/package/standard-cards.cpp \
     src/package/standard-generals.cpp \
     src/package/standard-skillcards.cpp \
-    src/package/thicket.cpp \
     src/package/wind.cpp \
     src/scenario/boss-mode-scenario.cpp \
     src/scenario/couple-scenario.cpp \
@@ -208,7 +207,6 @@ HEADERS += \
     src/ui/table-pile.h \
     src/ui/timed-progressbar.h \
     src/ui/ui-utils.h \
-    src/package/thicket.h \
     src/package/wind.h \
     src/dialog/banipdialog.h \
     src/pch.h \

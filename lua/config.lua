@@ -40,7 +40,6 @@ config = {
 		"Standard",
 		"Wind",
 		"Fire",
-		"Thicket",
 		"JianGeDefense",
 		"BossMode",
 		"Test"
