@@ -107,7 +107,6 @@ SOURCES += \
     src/package/boss.cpp \
     src/package/fire.cpp \
     src/package/h-formation.cpp \
-    src/package/h-momentum.cpp \
     src/package/jiange-defense.cpp \
     src/package/joy.cpp \
     src/package/ling.cpp \
@@ -211,7 +210,6 @@ HEADERS += \
     src/package/boss.h \
     src/package/fire.h \
     src/package/h-formation.h \
-    src/package/h-momentum.h \
     src/package/jiange-defense.h \
     src/package/joy.h \
     src/package/ling.h \

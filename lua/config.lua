@@ -63,7 +63,6 @@ config = {
 		"Ling",
 		"Hegemony",
 		"HFormation",
-		"HMomentum",
 		"HegemonySP",
 		"JianGeDefense",
 		"BossMode",
