@@ -40,15 +40,6 @@ config = {
 		"Test"
 	},
 
-	hulao_generals = {
-		"package:nostal_standard",
-		"package:wind",
-		"package:nostal_wind",
-		"zhenji", "zhugeliang", "sunquan", "sunshangxiang",
-		"-zhangjiao", "-zhoutai", "-caoren", "-yuji",
-		"-nos_yuji"
-	},
-
 	xmode_generals = {
 		"package:nostal_standard",
 		"package:wind",

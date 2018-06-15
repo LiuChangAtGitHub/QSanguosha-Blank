@@ -178,7 +178,7 @@ void TaichenFightCard::use(Room *room, ServerPlayer *source, QList<ServerPlayer 
             room->useCard(CardUseStruct(duel, source, room->getLord()));
         }
         catch (TriggerEvent triggerEvent) {
-            if (triggerEvent == StageChange || triggerEvent == TurnBroken)
+            if (triggerEvent == TurnBroken)
                 source->tag.remove("Wushuang_" + duel->toString());
             throw triggerEvent;
         }
