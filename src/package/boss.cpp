@@ -647,13 +647,13 @@ BossModePackage::BossModePackage()
 
     General *mei = new General(this, "boss_mei", "god", 5, true, true);
     mei->addSkill("bossguimei");
-    mei->addSkill("nosenyuan");
+    //mei->addSkill("nosenyuan");
     mei->addSkill(new BossBeiming);
 
     General *wang = new General(this, "boss_wang", "god", 5, true, true);
     wang->addSkill("bossguimei");
     wang->addSkill(new BossLuolei);
-    wang->addSkill("huilei");
+    //wang->addSkill("huilei");
 
     General *liang = new General(this, "boss_liang", "god", 5, true, true);
     liang->addSkill("bossguimei");
@@ -662,15 +662,15 @@ BossModePackage::BossModePackage()
 
     General *niutou = new General(this, "boss_niutou", "god", 10, true, true);
     niutou->addSkill(new BossBaolian);
-    niutou->addSkill("mengjin");
+    //niutou->addSkill("mengjin");
     niutou->addSkill(new BossManjia);
     niutou->addSkill(new BossXiaoshou);
 
     General *mamian = new General(this, "boss_mamian", "god", 9, true, true);
     mamian->addSkill(new BossGuiji);
-    mamian->addSkill("nosfankui");
+    //mamian->addSkill("nosfankui");
     mamian->addSkill(new BossLianyu);
-    mamian->addSkill("nosjuece");
+    //mamian->addSkill("nosjuece");
 
     General *heiwuchang = new General(this, "boss_heiwuchang", "god", 15, true, true);
     heiwuchang->addSkill("bossguiji");
@@ -682,18 +682,18 @@ BossModePackage::BossModePackage()
     baiwuchang->addSkill("bossbaolian");
     baiwuchang->addSkill(new BossQiangzheng);
     baiwuchang->addSkill(new BossZuijiu);
-    baiwuchang->addSkill("nosjuece");
+    //baiwuchang->addSkill("nosjuece");
 
     General *luocha = new General(this, "boss_luocha", "god", 20, false, true);
     luocha->addSkill(new BossModao);
     luocha->addSkill(new BossQushou);
-    luocha->addSkill("yizhong");
-    luocha->addSkill("kuanggu");
+    //luocha->addSkill("yizhong");
+    //luocha->addSkill("kuanggu");
 
     General *yecha = new General(this, "boss_yecha", "god", 18, true, true);
     yecha->addSkill("bossmodao");
     yecha->addSkill(new BossMojian);
-    yecha->addSkill("bazhen");
+    //yecha->addSkill("bazhen");
     yecha->addSkill(new BossDanshu);
 }
 

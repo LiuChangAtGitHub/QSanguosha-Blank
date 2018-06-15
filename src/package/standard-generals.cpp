@@ -2837,7 +2837,7 @@ void StandardPackage::addGenerals()
 
     General *st_gongsunzan = new General(this, "st_gongsunzan", "qun"); // QUN 026
     st_gongsunzan->addSkill(new Qiaomeng);
-    st_gongsunzan->addSkill("yicong");
+    //st_gongsunzan->addSkill("yicong");
 
     // for skill cards
     addMetaObject<ZhihengCard>();

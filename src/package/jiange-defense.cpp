@@ -1016,12 +1016,12 @@ JianGeDefensePackage::JianGeDefensePackage()
 
     Machine *jg_machine_jileibaihu = new Machine(this, "jg_machine_jileibaihu", "shu", 4, true, true);
     jg_machine_jileibaihu->addSkill("jgjiguan");
-    jg_machine_jileibaihu->addSkill("zhenwei");
+    //jg_machine_jileibaihu->addSkill("zhenwei");
     jg_machine_jileibaihu->addSkill(new JGBenlei);
 
     Machine *jg_machine_lingjiaxuanwu = new Machine(this, "jg_machine_lingjiaxuanwu", "shu", 5, true, true);
     jg_machine_lingjiaxuanwu->addSkill("jgjiguan");
-    jg_machine_lingjiaxuanwu->addSkill("yizhong");
+    //jg_machine_lingjiaxuanwu->addSkill("yizhong");
     jg_machine_lingjiaxuanwu->addSkill(new JGLingyu);
 
     Machine *jg_machine_chiyuzhuque = new Machine(this, "jg_machine_chiyuzhuque", "shu", 5, true, true);
