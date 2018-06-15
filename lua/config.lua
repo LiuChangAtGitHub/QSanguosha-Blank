@@ -74,7 +74,6 @@ config = {
 		"JianGeDefense",
 		"BossMode",
 		"Yitian",
-		"Wisdom",
 		"Test"
 	},
 

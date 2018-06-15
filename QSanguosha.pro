@@ -117,7 +117,6 @@ SOURCES += \
     src/package/sp.cpp \
     src/package/special1v1.cpp \
     src/package/special3v3.cpp \
-    src/package/wisdom.cpp \
     src/package/yitian.cpp \
     src/package/yjcm.cpp \
     src/package/yjcm2012.cpp \
@@ -225,7 +224,6 @@ HEADERS += \
     src/package/sp.h \
     src/package/special1v1.h \
     src/package/special3v3.h \
-    src/package/wisdom.h \
     src/package/yitian.h \
     src/package/yjcm.h \
     src/package/yjcm2012.h \
