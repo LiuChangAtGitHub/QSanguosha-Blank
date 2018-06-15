@@ -995,7 +995,7 @@ JianGeDefensePackage::JianGeDefensePackage()
 
     Soul *jg_soul_zhugeliang = new Soul(this, "jg_soul_zhugeliang", "shu", 4, true, true);
     jg_soul_zhugeliang->addSkill(new JGBiantian);
-    jg_soul_zhugeliang->addSkill("bazhen");
+    //jg_soul_zhugeliang->addSkill("bazhen");
     related_skills.insertMulti("jgbiantian", "#qixing-clear");
 
     Soul *jg_soul_huangyueying = new Soul(this, "jg_soul_huangyueying", "shu", 4, false, true);

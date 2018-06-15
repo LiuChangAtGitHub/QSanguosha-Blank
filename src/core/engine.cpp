@@ -328,7 +328,6 @@ Engine::Engine(bool isManualMode)
     modes["08p"] = tr("8 players");
     modes["08pd"] = tr("8 players (2 renegades)");
     modes["08pz"] = tr("8 players (0 renegade)");
-    modes["08_defense"] = tr("8 players (JianGe Defense)");
     modes["09p"] = tr("9 players");
     modes["10pd"] = tr("10 players");
     modes["10p"] = tr("10 players (1 renegade)");
@@ -1055,8 +1054,6 @@ QString Engine::getRoles(const QString &mode) const
         return "ZN";
     } else if (mode == "04_1v3" || mode == "04_boss") {
         return "ZFFF";
-    } else if (mode == "08_defense") {
-        return "FFFFCCCC";
     }
 
     if (modes.contains(mode) || isNormalGameMode(mode)) { // hidden pz settings?

@@ -1114,8 +1114,7 @@ void GameRule::doBossModeDifficultySettings(ServerPlayer *lord) const
 void GameRule::rewardAndPunish(ServerPlayer *killer, ServerPlayer *victim) const
 {
     if (killer->isDead() || killer->getRoom()->getMode() == "06_XMode"
-        || killer->getRoom()->getMode() == "04_boss"
-        || killer->getRoom()->getMode() == "08_defense")
+        || killer->getRoom()->getMode() == "04_boss")
         return;
 
     if (killer->getRoom()->getMode() == "06_3v3") {
@@ -1152,12 +1151,6 @@ QString GameRule::getWinner(ServerPlayer *victim) const
             else
                 winner = "renegade+rebel";
         }
-    } else if (room->getMode() == "08_defense") {
-        QStringList alive_roles = room->aliveRoles(victim);
-        if (!alive_roles.contains("loyalist"))
-            winner = "rebel";
-        else if (!alive_roles.contains("rebel"))
-            winner = "loyalist";
     } else if (Config.EnableHegemony) {
         bool has_anjiang = false, has_diff_kingdoms = false;
         QString init_kingdom;

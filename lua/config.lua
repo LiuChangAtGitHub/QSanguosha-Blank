@@ -316,19 +316,4 @@ config = {
 		"yongsi:90",
 		"zhiheng:90",
 	},
-
-	jiange_defense_kingdoms = {
-		loyalist = "shu",
-		rebel = "wei",
-	},
-
-	jiange_defense_machine = {
-		wei = "jg_machine_tuntianchiwen+jg_machine_shihuosuanni+jg_machine_fudibian+jg_machine_lieshiyazi",
-		shu = "jg_machine_yunpingqinglong+jg_machine_jileibaihu+jg_machine_lingjiaxuanwu+jg_machine_chiyuzhuque",
-	},
-
-	jiange_defense_soul = {
-		wei = "jg_soul_caozhen+jg_soul_simayi+jg_soul_xiahouyuan+jg_soul_zhanghe",
-		shu = "jg_soul_liubei+jg_soul_zhugeliang+jg_soul_huangyueying+jg_soul_pangtong",
-	}
 }
