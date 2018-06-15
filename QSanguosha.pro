@@ -58,7 +58,6 @@ SOURCES += \
     src/package/wind.cpp \
     src/scenario/boss-mode-scenario.cpp \
     src/scenario/couple-scenario.cpp \
-    src/scenario/guandu-scenario.cpp \
     src/scenario/miniscenarios.cpp \
     src/scenario/scenario.cpp \
     src/scenario/scenerule.cpp \
@@ -172,7 +171,6 @@ HEADERS += \
     src/package/standard-skillcards.h \
     src/scenario/boss-mode-scenario.h \
     src/scenario/couple-scenario.h \
-    src/scenario/guandu-scenario.h \
     src/scenario/miniscenarios.h \
     src/scenario/scenario.h \
     src/scenario/scenerule.h \
