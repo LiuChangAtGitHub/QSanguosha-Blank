@@ -100,7 +100,6 @@ SOURCES += \
     src/ui/timed-progressbar.cpp \
     src/ui/ui-utils.cpp \
     src/package/boss.cpp \
-    src/package/fire.cpp \
     src/package/jiange-defense.cpp \
     src/package/joy.cpp \
     src/package/mountain.cpp \
@@ -190,7 +189,6 @@ HEADERS += \
     src/core/record-analysis.h \
     src/scenario/fancheng-scenario.h \
     src/package/boss.h \
-    src/package/fire.h \
     src/package/jiange-defense.h \
     src/package/joy.h \
     src/package/mountain.h \
