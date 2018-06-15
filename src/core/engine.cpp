@@ -21,7 +21,6 @@
 #include "guandu-scenario.h"
 #include "couple-scenario.h"
 #include "boss-mode-scenario.h"
-#include "zombie-scenario.h"
 #include "fancheng-scenario.h"
 
 Engine *Sanguosha = NULL;
@@ -52,7 +51,6 @@ void Engine::_loadModScenarios()
     addScenario(new GuanduScenario());
     addScenario(new CoupleScenario());
     addScenario(new FanchengScenario());
-    addScenario(new ZombieScenario());
     addScenario(new ImpasseScenario());
 }
 
