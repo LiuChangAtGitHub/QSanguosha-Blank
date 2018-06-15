@@ -125,7 +125,6 @@ SOURCES += \
     src/dialog/banipdialog.cpp \
     src/package/tw.cpp \
     src/package/ol.cpp \
-    src/package/jsp.cpp \
     src/dialog/mainwindowserverlist.cpp \
     src/dialog/dialogslsettings.cpp \
     src/server/qtupnpportmapping.cpp
@@ -240,7 +239,6 @@ HEADERS += \
     src/dialog/banipdialog.h \
     src/package/tw.h \
     src/package/ol.h \
-    src/package/jsp.h \
     src/pch.h \
     src/dialog/mainwindowserverlist.h \
     src/dialog/dialogslsettings.h \
