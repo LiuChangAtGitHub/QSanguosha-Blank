@@ -108,7 +108,6 @@ SOURCES += \
     src/package/fire.cpp \
     src/package/jiange-defense.cpp \
     src/package/joy.cpp \
-    src/package/ling.cpp \
     src/package/mountain.cpp \
     src/package/sp.cpp \
     src/package/special1v1.cpp \
@@ -210,7 +209,6 @@ HEADERS += \
     src/package/fire.h \
     src/package/jiange-defense.h \
     src/package/joy.h \
-    src/package/ling.h \
     src/package/mountain.h \
     src/package/sp.h \
     src/package/special1v1.h \

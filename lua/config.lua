@@ -60,7 +60,6 @@ config = {
 		"Miscellaneous",
 		"BGM",
 		"BGMDIY",
-		"Ling",
 		"Hegemony",
 		"HegemonySP",
 		"JianGeDefense",
