@@ -73,7 +73,6 @@ config = {
 		"NostalYJCM2013",
 		"JianGeDefense",
 		"BossMode",
-		"Yitian",
 		"Test"
 	},
 
