@@ -1171,9 +1171,7 @@ QStringList Engine::getRandomLords() const
     if (Config.EnableBasara)
         banlist_ban = Config.value("Banlist/Basara").toStringList();
 
-    if (Config.GameMode == "zombie_mode")
-        banlist_ban.append(Config.value("Banlist/Zombie").toStringList());
-    else if (isNormalGameMode(Config.GameMode))
+    if (isNormalGameMode(Config.GameMode))
         banlist_ban.append(Config.value("Banlist/Roles").toStringList());
 
     QStringList lords;
