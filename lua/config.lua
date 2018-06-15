@@ -54,7 +54,6 @@ config = {
 		"Special1v1",
 		"Special1v1Ext",
 		"SP",
-		"OL",
 		"Miscellaneous",
 		"Hegemony",
 		"HegemonySP",

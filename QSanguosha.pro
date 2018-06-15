@@ -119,7 +119,6 @@ SOURCES += \
     src/package/yjcm2015.cpp \
     swig/sanguosha_wrap.cxx \
     src/dialog/banipdialog.cpp \
-    src/package/ol.cpp \
     src/dialog/mainwindowserverlist.cpp \
     src/dialog/dialogslsettings.cpp \
     src/server/qtupnpportmapping.cpp
@@ -228,7 +227,6 @@ HEADERS += \
     src/package/thicket.h \
     src/package/wind.h \
     src/dialog/banipdialog.h \
-    src/package/ol.h \
     src/pch.h \
     src/dialog/mainwindowserverlist.h \
     src/dialog/dialogslsettings.h \
