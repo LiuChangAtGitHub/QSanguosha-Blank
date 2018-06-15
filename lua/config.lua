@@ -58,8 +58,6 @@ config = {
 		"TaiwanSP",
 		"TaiwanYJCM" ,
 		"Miscellaneous",
-		"BGM",
-		"BGMDIY",
 		"Hegemony",
 		"HegemonySP",
 		"JianGeDefense",

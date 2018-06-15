@@ -103,7 +103,6 @@ SOURCES += \
     src/ui/timed-progressbar.cpp \
     src/ui/ui-utils.cpp \
     src/package/assassins.cpp \
-    src/package/bgm.cpp \
     src/package/boss.cpp \
     src/package/fire.cpp \
     src/package/jiange-defense.cpp \
@@ -204,7 +203,6 @@ HEADERS += \
     src/package/hegemony.h \
     src/scenario/fancheng-scenario.h \
     src/package/assassins.h \
-    src/package/bgm.h \
     src/package/boss.h \
     src/package/fire.h \
     src/package/jiange-defense.h \
