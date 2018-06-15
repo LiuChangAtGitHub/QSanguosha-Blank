@@ -101,7 +101,6 @@ SOURCES += \
     src/ui/table-pile.cpp \
     src/ui/timed-progressbar.cpp \
     src/ui/ui-utils.cpp \
-    src/package/assassins.cpp \
     src/package/boss.cpp \
     src/package/fire.cpp \
     src/package/jiange-defense.cpp \
@@ -198,7 +197,6 @@ HEADERS += \
     src/util/socket.h \
     src/core/record-analysis.h \
     src/scenario/fancheng-scenario.h \
-    src/package/assassins.h \
     src/package/boss.h \
     src/package/fire.h \
     src/package/jiange-defense.h \
