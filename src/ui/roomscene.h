@@ -37,9 +37,9 @@ class QSanSelectableItem;
 class EffectAnimation;
 
 #ifndef Q_OS_WINRT
-#include <QDeclarativeEngine>
-#include <QDeclarativeContext>
-#include <QDeclarativeComponent>
+#include <QQmlEngine>
+#include <QQmlContext>
+#include <QQmlComponent>
 #endif
 
 class ScriptExecutor : public QDialog
@@ -382,9 +382,9 @@ private:
 
 #ifndef Q_OS_WINRT
     // for animation effects
-    QDeclarativeEngine *_m_animationEngine;
-    QDeclarativeContext *_m_animationContext;
-    QDeclarativeComponent *_m_animationComponent;
+    QQmlEngine *_m_animationEngine;
+    QQmlContext *_m_animationContext;
+    QQmlComponent *_m_animationComponent;
 #endif
 
 private slots:

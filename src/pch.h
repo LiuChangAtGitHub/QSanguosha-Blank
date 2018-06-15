@@ -17,7 +17,8 @@
 #include <QtWidgets>
 
 #ifndef Q_OS_WINRT
-#include <QtDeclarative>
+#include <QtQuick>
+#include <QtQml>
 #endif
 
 #include <fmod.hpp>

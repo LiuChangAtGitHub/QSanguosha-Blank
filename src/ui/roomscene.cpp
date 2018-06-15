@@ -385,9 +385,9 @@ RoomScene::RoomScene(QMainWindow *main_window)
 
 
 #ifndef Q_OS_WINRT
-    _m_animationEngine = new QDeclarativeEngine(this);
-    _m_animationContext = new QDeclarativeContext(_m_animationEngine->rootContext(), this);
-    _m_animationComponent = new QDeclarativeComponent(_m_animationEngine, QUrl::fromLocalFile("ui-script/animation.qml"), this);
+    _m_animationEngine = new QQmlEngine(this);
+    _m_animationContext = new QQmlContext(_m_animationEngine->rootContext(), this);
+    _m_animationComponent = new QQmlComponent(_m_animationEngine, QUrl::fromLocalFile("ui-script/animation.qml"), this);
 #endif
 }
 
