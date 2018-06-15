@@ -53,10 +53,7 @@ config = {
 		"Special3v3Ext",
 		"Special1v1",
 		"Special1v1Ext",
-		"SP",
-		"Miscellaneous",
 		"Hegemony",
-		"HegemonySP",
 		"JianGeDefense",
 		"BossMode",
 		"Test"
