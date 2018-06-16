@@ -12,26 +12,18 @@ function askForShowGeneral(self, choices)
 	if triggerEvent == sgs.DamageInflicted then
 		local damage = data:toDamage()
 		for _, player in ipairs(players) do
-			if damage and player:hasSkills(sgs.masochism_skill .. "|zhichi|zhiyu|fenyong") and not self:isFriend(damage.from, damage.to) then return "yes" end
+			if damage and player:hasSkills(sgs.masochism_skill) and not self:isFriend(damage.from, damage.to) then return "yes" end
 			if damage and damage.damage > self.player:getHp() + self:getAllPeachNum() then return "yes" end
 		end
 	elseif triggerEvent == sgs.CardEffected then
 		local effect = data:toCardEffect()
 		for _, player in ipairs(players) do
 			if self.room:isProhibited(effect.from, player, effect.card) and self:isEnemy(effect.from, effect.to) then return "yes" end
-			if player:hasSkill("xiangle") and effect.card:isKindOf("Slash") then return "yes" end
-			if player:hasSkill("jiang") and ((effect.card:isKindOf("Slash") and effect.card:isRed()) or effect.card:isKindOf("Duel")) then return "yes" end
-			if player:hasSkill("tuntian") then return "yes" end
 		end
 	end
 
 	if self.room:alivePlayerCount() <= 3 then return "yes" end
 	if sgs.getValue(self.player) < 6 then return "no" end
-	local skills_to_show = "bazhen|yizhong|zaiqi|feiying|buqu|kuanggu|kofkuanggu|guanxing|luoshen|tuxi|nostuxi|zhiheng|qiaobian|" ..
-							"longdan|liuli|longhun|shelie|luoying|anxian|yicong|wushuang|jueqing|niepan"
-	for _, player in ipairs(players) do
-		if player:hasSkills(skills_to_show) then return "yes" end
-	end
 	if self.player:getDefensiveHorse() and self.player:getArmor() and not self:isWeak() then return "yes" end
 end
 

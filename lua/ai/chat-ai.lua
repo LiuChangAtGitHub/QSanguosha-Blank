@@ -20,26 +20,10 @@ function speakTrigger(card,from,to,event)
 		return
 	end
 	
-	if (event=="death") and from:hasSkill("ganglie") then
-		speak(from,"ganglie_death")
-	end
-
 	if not card then return end
 
 	if card:isKindOf("Indulgence") and (to:getHandcardNum()>to:getHp()) then
 		speak(to, "indulgence")
-	elseif card:isKindOf("LeijiCard") then
-		speak(from, "leiji_jink")
-	elseif card:isKindOf("QuhuCard") then
-		speak(from, "quhu")
-	elseif card:isKindOf("Slash") and from:hasSkill("wusheng") and to:hasSkill("yizhong") then
-		speak(from, "wusheng_yizhong")
-	elseif card:isKindOf("Slash") and to:hasSkill("yiji|nosyiji") and (to:getHp()<=1) then
-		speak(to, "guojia_weak")
-	elseif card:isKindOf("SavageAssault") and (to:hasSkill("kongcheng") or to:hasSkill("huoji")) then
-		speak(to, "daxiang")
-	elseif card:isKindOf("FireAttack") and to:hasSkill("luanji") then
-		speak(to, "yuanshao_fire")
 	elseif card:isKindOf("Peach") and math.random() < 0.1 then
 		speak(to, "usepeach")
 	end
@@ -105,21 +89,6 @@ sgs.ai_chat_func[sgs.Dying].fuck_renegade=function(self, player, data)
 				"没戏了，小内不帮忙的话，我们全部托管吧",
 				}
 	if (self.role=="rebel" or self.role=="loyalist") and sgs.current_mode_players["renegade"]>0 and dying.who:objectName() == player:objectName() and math.random() < 0.5 then
-		local index =1+ (os.time() % #chat)
-		player:speak(chat[index])
-	end
-end
-
-sgs.ai_chat_func[sgs.EventPhaseStart].comeon=function(self, player, data)
-	if player:getState() ~= "robot" then return end
-	local chat ={"有货，可以来搞一下",
-				"有闪有黑桃",
-				"看我眼色行事",
-				"没闪, 忠内不要乱来",
-				"不爽，来啊！砍我啊",
-				"求杀求砍求蹂躏",
-				}
-	if player:getPhase()== sgs.Player_Finish and not player:isKongcheng() and player:hasSkills("leiji|nosleiji") and os.time() % 10 < 4 then
 		local index =1+ (os.time() % #chat)
 		player:speak(chat[index])
 	end
@@ -201,29 +170,6 @@ sgs.ai_chat_func[sgs.CardFinished].analeptic = function(self, player, data)
 	end
 end
 
-sgs.ai_chat_func[sgs.TargetConfirmed].UnlimitedBladeWorks = function(self, player, data)
-	if player:getState() ~= "robot" then return end
-	local use = data:toCardUse()
-	if use.card:isKindOf("ArcheryAttack") and player:hasSkill("luanji") and use.from and use.from:objectName() == player:objectName() and sgs.ai_yuanshao_ArcheryAttack then
-		if #sgs.ai_yuanshao_ArcheryAttack == 0 then
-			sgs.ai_yuanshao_ArcheryAttack = {
-				"此身，为剑所成",
-				"血如钢铁，心似琉璃",
-				"跨越无数战场而不败",
-				"未尝一度被理解",
-				"亦未尝一度有所得",
-				"剑之丘上，剑手孤单一人，沉醉于辉煌的胜利",
-				"铁匠孑然一身，执著于悠远的锻造",
-				"因此，此生没有任何意义",
-				"那么，此生无需任何意义",
-				"这身体，注定由剑而成"
-			}
-		end
-		player:speak(sgs.ai_yuanshao_ArcheryAttack[1])
-		table.remove(sgs.ai_yuanshao_ArcheryAttack, 1)
-	end
-end
-
 function SmartAI:speak(cardtype, isFemale)
 	if not sgs.GetConfig("AIChat", false) then return end
 	if self.player:getState() ~= "robot" then return end
@@ -236,85 +182,6 @@ function SmartAI:speak(cardtype, isFemale)
 			if isFemale and sgs.ai_chat[cardtype .. "_female"] then cardtype = cardtype .. "_female" end
 			local i = math.random(1, #sgs.ai_chat[cardtype])
 			self.player:speak(sgs.ai_chat[cardtype][i])
-		end
-	end
-end
-
-sgs.ai_chat_func[sgs.EventPhaseStart].luanwu = function(self, player, data)
-	if player:getPhase() == sgs.Player_Play then
-		local chat = {
-			"乱一个，乱一个",
-			"要乱了",
-			"完了，没杀"
-		}
-		local chat1 = {
-			"不要紧张",
-			"准备好了吗？",
-		}
-		if self.player:hasSkill("luanwu") and self.player:getMark("@chaos") > 0 then
-			for _, p in sgs.qlist(self.room:getAlivePlayers()) do
-				if p:objectName() ~= player:objectName() and p:getState() == "robot" and math.random() < 0.2 then
-					p:speak(chat[math.random(1, #chat)])
-				elseif p:objectName() == player:objectName() and p:getState() == "robot" and math.random() < 0.1 then
-					p:speak(chat1[math.random(1, #chat1)])
-				end
-			end
-		end
-	end
-end
-
-sgs.ai_chat_func[sgs.EventPhaseStart].start_jiange = function(self, player, data)
-	if self.room:getMode() ~= "08_defense" then return end
-	if player:getPhase() ~= sgs.Player_RoundStart then return end
-	if math.random() > 0.3 then return end
-
-	local kingdom = self.player:getKingdom()
-	local chat1 = {
-		"无知小儿，报上名来，饶你不死！",
-		"剑阁乃险要之地，诸位将军须得谨慎行事。",
-		"但看后山火起，人马一齐杀出！"
-		}
-	local chat2 = {
-		"嗷~！",
-		"呜~！",
-		"咕~！",
-		"呱~！",
-		"发动机已启动，随时可以出发——"
-		}
-	if kingdom == "shu" then
-		table.insert(chat1, "人在塔在！")
-		table.insert(chat1, "汉室存亡，在此一战！")
-		table.insert(chat1, "星星之火，可以燎原")
-		table.insert(chat2, "红色！")
-	elseif kingdom == "wei" then
-		table.insert(chat1, "众将官，剑阁去者！")
-		table.insert(chat1, "此战若胜，大业必成！")
-		table.insert(chat1, "一切反动派都是纸老虎")
-		table.insert(chat2, "蓝色！")
-	end
-	if string.find(self.player:getGeneral():objectName(), "baihu") then
-		table.insert(chat2, "喵~！")
-	end
-	if string.find(self.player:getGeneral():objectName(), "jiangwei") then  --姜维
-		table.insert(chat1, "白水地狭路多，非征战之所，不如且退，去救剑阁。若剑阁一失，是绝路也。")
-		table.insert(chat1, "今四面受敌，粮道不同，不如退守剑阁，再作良图。")
-	elseif string.find(self.player:getGeneral():objectName(), "dengai") then  --邓艾
-		table.insert(chat1, "剑阁之守必还赴涪，则会方轨而进；剑阁之军不还，则应涪之兵寡矣。")
-		table.insert(chat1, "以愚意度之，可引一军从阴平小路出汉中德阳亭，用奇兵径取成都，姜维必撤兵来救，将军乘虚就取剑阁，可获全功。")
-	elseif string.find(self.player:getGeneral():objectName(), "simayi") then  --司马懿
-		table.insert(chat1, "吾前军不能独当孔明之众，而又分兵为前后，非胜算也。不如留兵守上邽，余众悉往祁山。")
-		table.insert(chat1, "蜀兵退去，险阻处必有埋伏，须十分仔细，方可追之。")
-	elseif string.find(self.player:getGeneral():objectName(), "zhugeliang") then --诸葛亮
-		table.insert(chat1, "老臣受先帝厚恩，誓以死报。今若内有奸邪，臣安能讨贼乎？")
-		table.insert(chat1, "吾伐中原，非一朝一夕之事，正当为此长久之计。")
-	end
-	for _, p in sgs.qlist(self.room:getAlivePlayers()) do
-		if p:objectName() == self.player:objectName() and p:getState() == "robot" then
-			if string.find(self.player:getGeneral():objectName(), "machine") then
-			p:speak(chat2[math.random(1, #chat2)])
-			else
-			p:speak(chat1[math.random(1, #chat1)])
-			end
 		end
 	end
 end
@@ -415,12 +282,6 @@ end
 
 sgs.ai_chat={}
 
-sgs.ai_chat.yiji=
-{
-"再用力一点",
-"要死了啊!"
-}
-
 sgs.ai_chat.Snatch_female = {
 "啧啧啧，来帮你解决点手牌吧",
 "叫你欺负人!" ,
@@ -474,16 +335,6 @@ sgs.ai_chat.collateral=
 "你妹啊，我的刀！"
 }
 
-sgs.ai_chat.jijiang_female=
-{
-"别指望下次我会帮你哦"
-}
-
-sgs.ai_chat.jijiang=
-{
-"主公，我来啦"
-}
-
 --huanggai
 sgs.ai_chat.kurou=
 {
@@ -499,63 +350,6 @@ sgs.ai_chat.indulgence=
 "乐，乐你妹啊乐",
 "擦，乐我",
 "诶诶诶被乐了！"
-}
-
---leiji
-sgs.ai_chat.leiji_jink=
-{
-"我有闪我会到处乱说么？",
-"你觉得我有木有闪啊",
-"哈我有闪"
-}
-
---quhu
-sgs.ai_chat.quhu=
-{
-"出大的！",
-"来来来拼点了",
-"哟，拼点吧"
-}
-
---wusheng to yizhong
-sgs.ai_chat.wusheng_yizhong=
-{
-"诶你技能是啥来着？",
-"在杀的颜色这个问题上咱是色盲",
-"咦你的技能呢？"
-}
-
---salvageassault
-sgs.ai_chat.daxiang=
-{
-"好多大象啊！",
-"擦，孟获你的宠物又调皮了",
-"内牛满面啊敢不敢少来点AOE"
-}
-
---xiahoudun
-sgs.ai_chat.ganglie_death=
-{
-"菊花残，满地伤。。。"
-}
-
-sgs.ai_chat.guojia_weak=
-{
-"擦，再卖血会卖死的",
-"不敢再卖了诶诶诶诶"
-}
-
-sgs.ai_chat.yuanshao_fire=
-{
-"谁去打119啊",
-"别别别烧了别烧了。。。",
-"又烧啊，饶了我吧。。。"
-}
-
---xuchu
-sgs.ai_chat.luoyi=
-{
-"不脱光衣服干不过你"
 }
 
 sgs.ai_chat.bianshi = {
