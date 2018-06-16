@@ -10,10 +10,7 @@ local function useShit_LoseHp(self, card, use)
         amSafe = ( lose < hp + self:getCardsNum("Peach") )
     end
     if amSafe then
-        if self.player:hasSkill("zhaxiang") then
-            use.card = card
-            return 
-        elseif self.player:getHandcardNum() == 1 and self.player:getLostHp() == 0 and self:needKongcheng() then
+        if self.player:getHandcardNum() == 1 and self.player:getLostHp() == 0 and self:needKongcheng() then
             use.card = card
             return 
         elseif getBestHp(self.player) > self.player:getHp() and self:getOverflow() <= 0 then
@@ -24,9 +21,6 @@ local function useShit_LoseHp(self, card, use)
         if self.role == "renegade" or self.role == "lord" then
             return
         elseif self:getAllPeachNum() > 0 or self:getOverflow() <= 0 then
-            return 
-        elseif self.player:hasSkill("wuhun") and self:needDeath(self.player) then
-            use.card = card
             return 
         end
     end
@@ -38,18 +32,9 @@ local function useShit_FireDamage(self, card, use)
         end
     end
     local damage = 1
-    if self.player:hasSkill("chouhai") and self.player:isKongcheng() then
-        damage = damage + 1
-    end
     if self.player:hasArmorEffect("gale_shell") then
         damage = damage + 1
     elseif self.player:hasArmorEffect("vine") then
-        damage = damage + 1
-    elseif self.player:hasArmorEffect("bossmanjia") then
-        damage = damage + 1
-    end
-    local JinXuanDi = self.room:findPlayerBySkillName("wuling")
-    if JinXuanDi and JinXuanDi:getMark("@wind") > 0 then
         damage = damage + 1
     end
     if damage > 1 and self.player:hasArmorEffect("silver_lion") then
@@ -63,21 +48,8 @@ local function useShit_FireDamage(self, card, use)
         amSafe = ( damage < hp + peachNum )
     end
     if amSafe then
-        if self:hasSkills("kuanggu") then
-            use.card = card
-            return 
-        elseif self.player:hasSkill("kuangbao") and hp > 3 then
-            use.card = card
-            return 
-        end
         peachNum = peachNum or self:getCardsNum("Peach")
-        if self:hasSkills("guixin|yiji|nosyiji|chengxiang|noschengxiang") and peachNum > 0 then
-            use.card = card
-            return 
-        elseif self.player:hasSkill("jieming") and peachNum > 0 and self:getJiemingChaofeng(self.player) > 0 then
-            use.card = card
-            return 
-        elseif self.player:getHandcardNum() == 1 and self.player:getLostHp() == 0 and self:needKongcheng() then
+        if self.player:getHandcardNum() == 1 and self.player:getLostHp() == 0 and self:needKongcheng() then
             use.card = card
             return 
         elseif getBestHp(self.player) > self.player:getHp() and self:getOverflow() <= 0 then
@@ -88,9 +60,6 @@ local function useShit_FireDamage(self, card, use)
         if self.role == "renegade" or self.role == "lord" then
             return
         elseif self:getAllPeachNum() > 0 or self:getOverflow() <= 0 then
-            return 
-        elseif self.player:hasSkill("wuhun") and self:needDeath(self.player) then
-            use.card = card
             return 
         end
     end
@@ -102,13 +71,6 @@ local function useShit_ThunderDamage(self, card, use)
         end
     end
     local damage = 1
-    if self.player:hasSkill("chouhai") and self.player:isKongcheng() then
-        damage = damage + 1
-    end
-    local JinXuanDi = self.room:findPlayerBySkillName("wuling")
-    if JinXuanDi and JinXuanDi:getMark("@thunder") > 0 then
-        damage = damage + 1
-    end
     if damage > 1 and self.player:hasArmorEffect("silver_lion") then
         damage = 1
     end
@@ -120,21 +82,8 @@ local function useShit_ThunderDamage(self, card, use)
         amSafe = ( damage < hp + peachNum )
     end
     if amSafe then
-        if self:hasSkills("kuanggu") then
-            use.card = card
-            return 
-        elseif self.player:hasSkill("kuangbao") and hp > 3 then
-            use.card = card
-            return 
-        end
         peachNum = peachNum or self:getCardsNum("Peach")
-        if self:hasSkills("guixin|yiji|nosyiji|chengxiang|noschengxiang") and peachNum > 0 then
-            use.card = card
-            return 
-        elseif self.player:hasSkill("jieming") and peachNum > 0 and self:getJiemingChaofeng(self.player) > 0 then
-            use.card = card
-            return 
-        elseif self.player:getHandcardNum() == 1 and self.player:getLostHp() == 0 and self:needKongcheng() then
+        if self.player:getHandcardNum() == 1 and self.player:getLostHp() == 0 and self:needKongcheng() then
             use.card = card
             return 
         elseif getBestHp(self.player) > self.player:getHp() and self:getOverflow() <= 0 then
@@ -145,18 +94,12 @@ local function useShit_ThunderDamage(self, card, use)
         if self.role == "renegade" or self.role == "lord" then
             return
         elseif self:getAllPeachNum() > 0 or self:getOverflow() <= 0 then
-            return 
-        elseif self.player:hasSkill("wuhun") and self:needDeath(self.player) then
-            use.card = card
             return 
         end
     end
 end
 local function useShit_NormalDamage(self, card, use)
     local damage = 1
-    if self.player:hasSkill("chouhai") and self.player:isKongcheng() then
-        damage = damage + 1
-    end
     if damage > 1 and self.player:hasArmorEffect("silver_lion") then
         damage = 1
     end
@@ -168,21 +111,8 @@ local function useShit_NormalDamage(self, card, use)
         amSafe = ( damage < hp + peachNum )
     end
     if amSafe then
-        if self:hasSkills("kuanggu") then
-            use.card = card
-            return 
-        elseif self.player:hasSkill("kuangbao") and hp > 3 then
-            use.card = card
-            return 
-        end
         peachNum = peachNum or self:getCardsNum("Peach")
-        if self:hasSkills("guixin|yiji|nosyiji|chengxiang|noschengxiang") and peachNum > 0 then
-            use.card = card
-            return 
-        elseif self.player:hasSkill("jieming") and peachNum > 0 and self:getJiemingChaofeng(self.player) > 0 then
-            use.card = card
-            return 
-        elseif self.player:getHandcardNum() == 1 and self.player:getLostHp() == 0 and self:needKongcheng() then
+        if self.player:getHandcardNum() == 1 and self.player:getLostHp() == 0 and self:needKongcheng() then
             use.card = card
             return 
         elseif getBestHp(self.player) > self.player:getHp() and self:getOverflow() <= 0 then
@@ -193,9 +123,6 @@ local function useShit_NormalDamage(self, card, use)
         if self.role == "renegade" or self.role == "lord" then
             return
         elseif self:getAllPeachNum() > 0 or self:getOverflow() <= 0 then
-            return 
-        elseif self.player:hasSkill("wuhun") and self:needDeath(self.player) then
-            use.card = card
             return 
         end
     end
@@ -210,10 +137,7 @@ function SmartAI:useCardShit(card, use)
         useShit_LoseHp(self, card, use)
         return 
     end
-    local JinXuanDi = self.room:findPlayerBySkillName("wuling")
-    if JinXuanDi and JinXuanDi:getMark("@fire") > 0 then
-        useShit_FireDamage(self, card, use)
-    elseif suit == sgs.Card_Heart then
+    if suit == sgs.Card_Heart then
         useShit_FireDamage(self, card, use)
     elseif suit == sgs.Card_Club then
         useShit_ThunderDamage(self, card, use)
@@ -252,44 +176,6 @@ sgs.ai_skill_playerchosen["yx_sword"] = function(self, targets)
         end
     end
     if willKillVictim then
-        if victim:hasSkill("yuwen") then
-            return nil
-        elseif victim:hasSkill("duanchang") then
-            local bad_skills = "benghuai|wumou|shiyong|yaowu|zaoyao|chanyuan|chouhai"
-            local function hasOtherSkills(player)
-                local skills = player:getVisibleSkillList()
-                for _,skill in sgs.qlist(skills) do
-                    if skill:inherits("SPConvertSkill") then
-                    elseif skill:isAttachedLordSkill() then
-                    elseif skill:isLordSkill() then
-                        if player:hasLordSkill(skill:objectName()) then
-                            return true
-                        end
-                    elseif not string.find(bad_skills, skill:objectName()) then
-                        return true
-                    end
-                end
-                return false
-            end
-            if #friends > 0 then
-                self:sort(friends, "defense")
-                for _,friend in ipairs(friends) do
-                    if self:hasSkills(bad_skills, friend) then
-                        if not hasOtherSkills(friend) then
-                            return friend
-                        end
-                    end
-                end
-            end
-            if #enemies > 0 then
-                self:sort(enemies, "threat")
-                for _,enemy in ipairs(enemies) do
-                    if hasOtherSkills(enemy) then
-                        return enemy
-                    end
-                end
-            end
-        end
         local role = sgs.evaluatePlayerRole(victim)
         if role == "rebel" then
             if #friends > 0 then
@@ -382,9 +268,6 @@ function SmartAI:useCardGaleShell(card, use)
     if #targets > 0 then
         local function getArmorUseValue(target)
             local value = 0
-            if target:getMark("@gale") > 0 then
-                value = value + 2
-            end
             local armor = target:getArmor()
             if armor then
                 value = value + 10
@@ -394,26 +277,14 @@ function SmartAI:useCardGaleShell(card, use)
                 if self:hasSkills(sgs.lose_equip_skill, target) then
                     value = value - 1.5
                 end
-                if target:hasSkill("tuntian") then
-                    value = value - 1
-                end
             else
                 value = value + 2
-                if self:hasSkills("bazhen|yizhong|jiqiao|bossmanjia", target) then
-                    value = value + 8
-                end
                 if self:hasSkills(sgs.lose_equip_skill, target) then
                     value = value - 2
                 end
                 if self:hasSkills(sgs.need_equip_skill, target) then
                     value = value - 2
                 end
-            end
-            if self:hasSkills("jijiu|longhun", target) then
-                value = value - 5
-            end
-            if self:hasSkills("wusheng|wushen", target) then
-                value = value - 2
             end
             return value
         end
@@ -445,9 +316,6 @@ function SmartAI:useCardEarthquake(card, use)
     if self.player:containsTrick("earthquake") then
         return
     elseif self.player:isProhibited(self.player, card) then
-        return
-    elseif self.player:containsTrick("YanxiaoCard") and self:getOverflow() > 0 then
-        use.card = card
         return
     end
     local value = 0
@@ -490,15 +358,6 @@ function SmartAI:useCardEarthquake(card, use)
     end
     if #self.enemies > 0 then
         for _,enemy in ipairs(self.enemies) do
-            if self:hasSkills("tiandu|luoying", enemy) then
-                value = value - 10
-            end
-            if self:hasSkills("guanxing|super_guanxing", enemy) then
-                value = value + 2
-            end
-            if enemy:hasSkill("xinzhan") then
-                value = value - 1
-            end
             local equips = enemy:getEquips()
             if not equips:isEmpty() then
                 value = value + getEquipsValue(enemy)
@@ -508,23 +367,11 @@ function SmartAI:useCardEarthquake(card, use)
                 if enemy:getArmor() and self:needToThrowArmor(enemy) then
                     value = value - 1.5
                 end
-                if enemy:hasSkill("tuntian") then
-                    value = value - 1
-                end
             end
         end
     end
     if #self.friends > 0 then
         for _,friend in ipairs(self.friends) do
-            if self:hasSkills("tiandu|luoying", friend) then
-                value = value + 10
-            end
-            if self:hasSkills("guanxing|super_guanxing", friend) then
-                value = value - 2
-            end
-            if friend:hasSkill("xinzhan") then
-                value = value + 1
-            end
             local equips = friend:getEquips()
             if not equips:isEmpty() then
                 value = value - getEquipsValue(friend)
@@ -534,18 +381,7 @@ function SmartAI:useCardEarthquake(card, use)
                 if friend:getArmor() and self:needToThrowArmor(friend) then
                     value = value + 1.5
                 end
-                if friend:hasSkill("tuntian") then
-                    value = value + 1
-                end
             end
-        end
-    end
-    local HanHaoShiHuan = self.room:findPlayerBySkillName("yonglve")
-    if HanHaoShiHuan then
-        if self:isFriend(HanHaoShiHuan) then
-            value = value + 10
-        else
-            value = value - 10
         end
     end
     if value > 0 then
@@ -560,9 +396,6 @@ function SmartAI:useCardTyphoon(card, use)
     if self.player:containsTrick("typhoon") then
         return 
     elseif self.player:isProhibited(self.player, card) then
-        return
-    elseif self.player:containsTrick("YanxiaoCard") and self:getOverflow() > 0 then
-        use.card = card
         return
     end
     local finalRetrial, wizard = self:getFinalRetrial(self.player, "typhoon")
@@ -590,24 +423,10 @@ function SmartAI:useCardTyphoon(card, use)
                 v = v + 1.5 ^ keep
             end
         end
-        if self:hasSkills("tiandu|luoying", p) then
-            v = v - 10
-        end
-        if self:hasSkills("guanxing|super_guanxing", p) then
-            v = v + 2
-        end
         if self:isFriend(p) then
             v = - v
         end
         value = value + v
-    end
-    local HanHaoShiHuan = self.room:findPlayerBySkillName("yonglve")
-    if HanHaoShiHuan then
-        if self:isFriend(HanHaoShiHuan) then
-            value = value + 10
-        else
-            value = value - 10
-        end
     end
     if value > 0 then
         if self:getOverflow() > 0 or value > 6 then
@@ -667,9 +486,6 @@ function SmartAI:useCardVolcano(card, use)
         return 
     elseif self.player:isProhibited(self.player, card) then
         return
-    elseif self.player:containsTrick("YanxiaoCard") and self:getOverflow() > 0 then
-        use.card = card
-        return
     end
     local finalRetrial, wizard = self:getFinalRetrial(self.player, "volcano")
     if finalRetrial == 2 then
@@ -691,24 +507,9 @@ function SmartAI:useCardVolcano(card, use)
             damage = 2
             if p:hasArmorEffect("vine") or p:hasArmorEffect("gale_shell") then
                 damage = damage + 1
-            elseif p:hasSkill("bossmanjia") then
-                damage = damage + 1
             end
             if p:hasArmorEffect("silver_lion") then
                 damage = 1
-            end
-            if p:hasSkill("tianxiang") then
-                can_transfer = true
-            elseif p:hasLordSkill("shichou") then
-                local others = self.room:getOtherPlayers(p)
-                for _,victim in sgs.qlist(others) do
-                    if victim:getMark("@hate_to") > 0 then
-                        if victim:getMark("hate_"..p:objectName()) > 0 then
-                            can_transfer = true
-                            break
-                        end
-                    end
-                end
             end
         end
         if damage > 0 and not can_transfer then
@@ -721,19 +522,10 @@ function SmartAI:useCardVolcano(card, use)
             if deathFlag then
                 v = v + 50
             else
-                if self:hasSkills("jianxiong|yiji|nosyiji|fangzhu|jieming|guixin|chengxiang|noschengxiang", p) then
-                    v = v - damage
-                end
                 if self:isWeak(p) then
                     v = v + 1
                 end
             end
-        end
-        if self:hasSkills("tiandu|luoying", p) then
-            v = v - 10
-        end
-        if self:hasSkills("guanxing|super_guanxing", p) then
-            v = v + 2
         end
         if isFriend then
             v = - v
@@ -750,14 +542,6 @@ function SmartAI:useCardVolcano(card, use)
         end
         value = value + v
     end
-    local HanHaoShiHuan = self.room:findPlayerBySkillName("yonglve")
-    if HanHaoShiHuan then
-        if self:isFriend(HanHaoShiHuan) then
-            value = value + 10
-        else
-            value = value - 10
-        end
-    end
     if value > 0 then
         if self:getOverflow() > 0 or value > 6 then
             use.card = card
@@ -772,9 +556,6 @@ function SmartAI:useCardDeluge(card, use)
     if self.player:containsTrick("deluge") then
         return 
     elseif self.player:isProhibited(self.player, card) then
-        return
-    elseif self.player:containsTrick("YanxiaoCard") and self:getOverflow() > 0 then
-        use.card = card
         return
     end
     local finalRetrial, wizard = self:getFinalRetrial(self.player, "deluge")
@@ -800,28 +581,12 @@ function SmartAI:useCardDeluge(card, use)
             end
             local the_lucky = target:getNextAlive()
             for i=1, throw_count, 1 do
-                if the_lucky:hasSkill("manjuan") then
-                elseif self:isFriend(the_lucky) then
+                if self:isFriend(the_lucky) then
                     v = v + 1
                 else
                     v = v - 1
                 end
                 the_lucky = the_lucky:getNextAlive()
-            end
-        end
-        if isFriend then
-            if target:hasSkill("tiandu") then
-                v = v + 1
-            end
-            if target:hasSkill("luoying") then
-                v = v + 0.5
-            end
-        else
-            if target:hasSkill("tiandu") then
-                v = v - 1
-            end
-            if target:hasSkill("luoying") then
-                v = v - 0.5
             end
         end
         return v
@@ -840,14 +605,6 @@ function SmartAI:useCardDeluge(card, use)
     local target = targets[1]
     local target_value = values[target:objectName()] or 0
     value = value + target_value
-    local HanHaoShiHuan = self.room:findPlayerBySkillName("yonglve")
-    if HanHaoShiHuan then
-        if self:isFriend(HanHaoShiHuan) then
-            value = value + 10
-        else
-            value = value - 10
-        end
-    end
     if value > 0 then
         if self:getOverflow() > 0 or value > 6 then
             use.card = card
@@ -862,9 +619,6 @@ function SmartAI:useCardMudslide(card, use)
     if self.player:containsTrick("mudslide") then
         return 
     elseif self.player:isProhibited(self.player, card) then
-        return
-    elseif self.player:containsTrick("YanxiaoCard") and self:getOverflow() > 0 then
-        use.card = card
         return
     end
     local finalRetrial, wizard = self:getFinalRetrial(self.player, "mudslide")
@@ -889,18 +643,8 @@ function SmartAI:useCardMudslide(card, use)
             if e_num == 0 then --make damage
                 if isFriend then
                     v = v - 4
-                    if self:hasSkills("jianxiong|yiji|nosyiji|fangzhu|jieming|guixin|chengxiang|noschengxiang", target) then
-                        if not self:isWeak(target) then
-                            v = v + 3
-                        end
-                    end
                 else
                     v = v + 4
-                    if self:hasSkills("jianxiong|yiji|nosyiji|fangzhu|jieming|guixin|chengxiang|noschengxiang", target) then
-                        if not self:isWeak(target) then
-                            v = v - 3
-                        end
-                    end
                 end
             else --discard equips
                 if isFriend then
@@ -917,21 +661,6 @@ function SmartAI:useCardMudslide(card, use)
                     if target:getArmor() and self:needToThrowArmor(target) then
                         v = v - 1.5
                     end
-                end
-            end
-            if isFriend then
-                if target:hasSkill("tiandu") then
-                    v = v + 1
-                end
-                if target:hasSkill("luoying") then
-                    v = v + 0.5
-                end
-            else
-                if target:hasSkill("tiandu") then
-                    v = v - 1
-                end
-                if target:hasSkill("luoying") then
-                    v = v - 0.5
                 end
             end
             table.insert(values[target:objectName()], v)
@@ -953,14 +682,6 @@ function SmartAI:useCardMudslide(card, use)
         end
         if pc > 0 then
             value = value + pv / pc
-        end
-    end
-    local HanHaoShiHuan = self.room:findPlayerBySkillName("yonglve")
-    if HanHaoShiHuan then
-        if self:isFriend(HanHaoShiHuan) then
-            value = value + 5
-        else
-            value = value - 5
         end
     end
     if value > 0 then
