@@ -19,7 +19,6 @@
 #include "miniscenarios.h"
 
 #include "couple-scenario.h"
-#include "fancheng-scenario.h"
 
 Engine *Sanguosha = NULL;
 
@@ -47,7 +46,6 @@ void Engine::_loadMiniScenarios()
 void Engine::_loadModScenarios()
 {
     addScenario(new CoupleScenario());
-    addScenario(new FanchengScenario());
 }
 
 void Engine::addPackage(const QString &name)

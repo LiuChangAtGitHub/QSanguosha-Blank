@@ -87,7 +87,6 @@ SOURCES += \
     src/util/nativesocket.cpp \
     src/util/recorder.cpp \
     src/core/record-analysis.cpp \
-    src/scenario/fancheng-scenario.cpp \
     src/core/room-state.cpp \
     src/core/wrapped-card.cpp \
     src/ui/bubblechatbox.cpp \
@@ -181,7 +180,6 @@ HEADERS += \
     src/util/recorder.h \
     src/util/socket.h \
     src/core/record-analysis.h \
-    src/scenario/fancheng-scenario.h \
     src/package/joy.h \
     src/package/mountain.h \
     src/package/sp.h \
