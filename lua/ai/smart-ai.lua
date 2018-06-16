@@ -5276,14 +5276,14 @@ function SmartAI:adjustAIRole()
 end
 
 dofile "lua/ai/debug-ai.lua"
-dofile "lua/ai/imagine-ai.lua"
+dofile "lua/ai/guanxing-ai.lua"
+dofile "lua/ai/compat-ai.lua"
 dofile "lua/ai/standard_cards-ai.lua"
 dofile "lua/ai/maneuvering-ai.lua"
-dofile "lua/ai/standard-ai.lua"
+dofile "lua/ai/ex_cards-ai.lua"
 dofile "lua/ai/chat-ai.lua"
-dofile "lua/ai/basara-ai.lua"
 
-local loaded = "standard|standard_cards|maneuvering|sp"
+local loaded = "standard_cards|maneuvering"
 
 local ai_files = sgs.GetFileNames("lua/ai")
 
@@ -5298,7 +5298,7 @@ for _, aextension in ipairs(sgs.Sanguosha:getExtensions()) do
     end
 end
 
-dofile "lua/ai/sp-ai.lua"
+dofile "lua/ai/basara-ai.lua"
 dofile "lua/ai/special3v3-ai.lua"
 
 for _, ascenario in ipairs(sgs.Sanguosha:getModScenarioNames()) do
