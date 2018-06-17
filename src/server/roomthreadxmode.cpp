@@ -52,6 +52,15 @@ void RoomThreadXMode::run()
         }
     }
 
+    int min_count = room->m_players.length() * 5;
+    if (general_names.length() < min_count) {
+        for (int index=general_names.length(); index<min_count; index++) {
+            if (rand() % 2 == 1)
+                general_names.append("sujiang");
+            else
+                general_names.append("sujiangf");
+        }
+    }
     qShuffle(general_names);
 
     int index = 0;

@@ -1131,6 +1131,9 @@ QStringList Engine::getLords(bool contain_banned) const
     QStringList lords;
     QStringList general_names = getLimitedGeneralNames();
 
+    if (lord_list.isEmpty())
+        return lords;
+
     // add intrinsic lord
     foreach (QString lord, lord_list) {
         if (!general_names.contains(lord))
@@ -1190,6 +1193,9 @@ QStringList Engine::getRandomLords() const
         nonlord_list << nonlord;
     }
 
+    if (nonlord_list.isEmpty())
+        return lords;
+
     godLottery(nonlord_list);
 
     qShuffle(nonlord_list);
@@ -1218,16 +1224,6 @@ QStringList Engine::getLimitedGeneralNames(const QString &kingdom) const
             general_names << itor.key();
     }
 
-    // special case for neo standard package
-    if (getBanPackages().contains("standard") && !getBanPackages().contains("nostal_standard")) {
-        if (kingdom.isEmpty() || kingdom == "wei")
-            general_names << "zhenji";
-        if (kingdom.isEmpty() || kingdom == "shu")
-            general_names << "zhugeliang";
-        if (kingdom.isEmpty() || kingdom == "wu")
-            general_names << "sunquan" << "sunshangxiang";
-    }
-
     return general_names;
 }
 
@@ -1235,8 +1231,6 @@ QStringList Engine::getRandomGenerals(int count, const QSet<QString> &ban_set, c
 {
     QStringList all_generals = getLimitedGeneralNames(kingdom);
     QSet<QString> general_set = all_generals.toSet();
-
-    Q_ASSERT(all_generals.count() >= count);
 
     if (Config.EnableBasara)
         general_set = general_set.subtract(Config.value("Banlist/Basara", "").toStringList().toSet());
@@ -1254,6 +1248,9 @@ QStringList Engine::getRandomGenerals(int count, const QSet<QString> &ban_set, c
 
     // shuffle them
     qShuffle(all_generals);
+
+    if (all_generals.length() <= count)
+        return all_generals;
 
     QStringList general_list = all_generals.mid(0, count);
     Q_ASSERT(general_list.count() == count);

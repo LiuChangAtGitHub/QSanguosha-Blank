@@ -19,46 +19,7 @@ RoomThread3v3::RoomThread3v3(Room *room)
 
 QStringList RoomThread3v3::getGeneralsWithoutExtension() const
 {
-    QList<const General *> generals;
-
-    QStringList list_name;
-    list_name << "nos_caocao" << "nos_simayi" << "nos_xiahoudun" << "nos_zhangliao" << "nos_xuchu" << "nos_guojia" << "zhenji"
-        << "nos_liubei" << "nos_guanyu" << "nos_zhangfei" << "nos_zhaoyun" << "zhugeliang" << "nos_machao" << "nos_huangyueying"
-        << "sunquan" << "nos_ganning" << "nos_lvmeng" << "nos_huanggai" << "nos_zhouyu" << "nos_daqiao" << "nos_luxun" << "sunshangxiang"
-        << "nos_huatuo" << "nos_lvbu" << "nos_diaochan"
-        << "nos_caoren" << "xiahouyuan" << "weiyan" << "huangzhong"
-        << "xiaoqiao" << "nos_zhoutai" << "nos_zhangjiao";
-    foreach(QString general_name, list_name)
-        generals << Sanguosha->getGeneral(general_name);
-
-    QString rule = Config.value("3v3/OfficialRule", "2013").toString();
-    if (rule == "2012") {
-        QStringList list_remove, list_add;
-        list_remove << "nos_zhangjiao" << "nos_caoren" << "nos_lvmeng" << "nos_xiahoudun" << "weiyan";
-        list_add << "sunjian" << "menghuo" << "xuhuang" << "pangde" << "zhugejin";
-        foreach(QString general_name, list_remove)
-            generals.removeOne(Sanguosha->getGeneral(general_name));
-        foreach(QString general_name, list_add)
-            generals << Sanguosha->getGeneral(general_name);
-    } else if (rule == "2013") {
-        QStringList list_remove, list_add;
-        list_remove << "nos_zhangjiao" << "nos_caoren" << "nos_lvmeng" << "nos_xiahoudun" << "weiyan"
-            << "nos_luxun" << "huangzhong" << "nos_xuchu" << "nos_zhoutai" << "nos_zhaoyun"
-            << "nos_guanyu" << "nos_lvbu" << "nos_diaochan";
-        list_add << "sunjian" << "xuhuang" << "pangde" << "jiaxu" << "sunce"
-            << "jiangwei" << "zhugejin" << "vs_nos_xiahoudun" << "vs_nos_guanyu" << "vs_nos_zhaoyun"
-            << "vs_nos_lvbu" << "wenpin" << "diaochan";
-        foreach(QString general_name, list_remove)
-            generals.removeOne(Sanguosha->getGeneral(general_name));
-        foreach(QString general_name, list_add)
-            generals << Sanguosha->getGeneral(general_name);
-    }
-
-    QStringList general_names;
-    foreach(const General *general, generals)
-        general_names << general->objectName();
-
-    return general_names;
+    return QStringList();
 }
 
 void RoomThread3v3::run()
@@ -86,6 +47,14 @@ void RoomThread3v3::run()
     } else
         general_names = getGeneralsWithoutExtension();
 
+    if (general_names.length() < 16) {
+        for (int index=general_names.length(); index<16; index++) {
+            if (rand() % 2 == 1)
+                general_names.append("sujiang");
+            else
+                general_names.append("sujiangf");
+        }
+    }
     qShuffle(general_names);
     general_names = general_names.mid(0, 16);
 

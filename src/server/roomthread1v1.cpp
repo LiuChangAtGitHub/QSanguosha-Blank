@@ -24,28 +24,20 @@ void RoomThread1v1::run()
     int total_num = rule != "Classical" ? 12 : 10;
 
     if (!Config.value("1v1/UsingExtension", false).toBool()) {
-        const Package *stdpack = Sanguosha->findChild<const Package *>("standard");
-        const Package *windpack = Sanguosha->findChild<const Package *>("wind");
-
         QStringList candidates;
         if (rule == "Classical") {
-            foreach(const General *general, stdpack->findChildren<const General *>())
-                candidates << general->objectName();
-            foreach(const General *general, windpack->findChildren<const General *>())
-                candidates << general->objectName();
-        } else {
-            candidates << "nos_caocao" << "nos_simayi" << "nos_xiahoudun" << "kof_nos_zhangliao"
-                << "kof_nos_xuchu" << "nos_guojia" << "kof_zhenji" << "kof_xiahouyuan"
-                << "nos_caoren" << "dianwei" << "kof_nos_guanyu" << "nos_zhangfei"
-                << "zhugeliang" << "nos_zhaoyun" << "nos_machao" << "kof_nos_huangyueying"
-                << "kof_huangzhong" << "kof_jiangwei" << "kof_menghuo" << "kof_zhurong"
-                << "sunquan" << "nos_ganning" << "nos_huanggai" << "nos_zhouyu"
-                << "nos_luxun" << "kof_sunshangxiang" << "sunjian" << "xiaoqiao"
-                << "nos_lvbu" << "kof_nos_diaochan" << "yanliangwenchou" << "hejin";
-            if (rule == "2013") {
-                candidates << "kof_nos_liubei" << "kof_weiyan" << "kof_nos_lvmeng" << "kof_nos_daqiao"
-                    << "nos_zhoutai" << "kof_nos_huatuo" << "nos_zhangjiao" << "pangde"
-                    << "niujin" << "hansui";
+            //
+        } else if (rule == "WZZZ") {
+            //
+        } else if (rule == "2013") {
+            //
+        }
+        if (candidates.length() < total_num) {
+            for (int index=candidates.length(); index<total_num; index++) {
+                if (rand() % 2 == 1)
+                    candidates.append("sujiang");
+                else
+                    candidates.append("sujiangf");
             }
         }
         qShuffle(candidates);
@@ -53,6 +45,15 @@ void RoomThread1v1::run()
     } else {
         QSet<QString> banset = Config.value("Banlist/1v1").toStringList().toSet();
         general_names = Sanguosha->getRandomGenerals(total_num, banset);
+        if (general_names.length() < total_num) {
+            for (int index=general_names.length(); index<total_num; index++) {
+                if (rand() % 2 == 1)
+                    general_names.append("sujiang");
+                else
+                    general_names.append("sujiangf");
+            }
+            qShuffle(general_names);
+        }
     }
 
     if (rule == "Classical") {

@@ -2572,6 +2572,16 @@ void Room::assignGeneralsForPlayers(const QList<ServerPlayer *> &to_assign)
     const int max_available = (total - existed.size()) / to_assign.length();
     const int choice_count = qMin(max_choice, max_available);
 
+    if (choice_count <= 0) {
+        Config.EnableHegemony = false; //If someone is "sujiang" or "sujiangf", we cannot play in "hegemony" mode.
+        foreach (ServerPlayer *player, to_assign) {
+            player->clearSelected();
+            player->addToSelected("sujiang");
+            player->addToSelected("sujiangf");
+        }
+        return ;
+    }
+
     QStringList choices = Sanguosha->getRandomGenerals(total - existed.size(), existed);
 
     if (Config.EnableHegemony) {
@@ -2636,8 +2646,11 @@ void Room::chooseGenerals(QList<ServerPlayer *> players)
                 lord_list = Sanguosha->getLords();
         else
             lord_list = Sanguosha->getRandomLords();
+        if (lord_list.isEmpty())
+            lord_list << "sujiang" << "sujiangf";
         QString general = askForGeneral(the_lord, lord_list);
         the_lord->setGeneralName(general);
+
         if (!Config.EnableBasara)
             broadcastProperty(the_lord, "general", general);
 
