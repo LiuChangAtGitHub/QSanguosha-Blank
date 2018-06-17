@@ -39,6 +39,15 @@ config = {
 
 		"Test"
 	},
+	
+	kof_classical_generals = {
+	},
+	
+	kof_wzzz_generals = {
+	},
+	
+	kof_2013_generals = {
+	},
 
 	xmode_generals = {
 	},

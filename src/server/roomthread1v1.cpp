@@ -26,11 +26,11 @@ void RoomThread1v1::run()
     if (!Config.value("1v1/UsingExtension", false).toBool()) {
         QStringList candidates;
         if (rule == "Classical") {
-            //
+            candidates = GetConfigFromLuaState(Sanguosha->getLuaState(), "kof_classical_generals").toStringList();
         } else if (rule == "WZZZ") {
-            //
+            candidates = GetConfigFromLuaState(Sanguosha->getLuaState(), "kof_wzzz_generals").toStringList();
         } else if (rule == "2013") {
-            //
+            candidates = GetConfigFromLuaState(Sanguosha->getLuaState(), "kof_2013_generals").toStringList();
         }
         if (candidates.length() < total_num) {
             for (int index=candidates.length(); index<total_num; index++) {
