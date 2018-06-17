@@ -1,10 +1,355 @@
-#include "joy.h"
+#include "ex-cards.h"
+#include "util.h"
+#include "settings.h"
+#include "wrapped-card.h"
 #include "engine.h"
 #include "clientplayer.h"
-#include "util.h"
-#include "wrapped-card.h"
-#include "room.h"
 #include "roomthread.h"
+#include "room.h"
+#include "maneuvering.h"
+
+class SPMoonSpearSkill : public WeaponSkill
+{
+public:
+    SPMoonSpearSkill() : WeaponSkill("sp_moonspear")
+    {
+        events << CardUsed << CardResponded;
+    }
+
+    bool trigger(TriggerEvent triggerEvent, Room *room, ServerPlayer *player, QVariant &data) const
+    {
+        if (player->getPhase() != Player::NotActive)
+            return false;
+
+        const Card *card = NULL;
+        if (triggerEvent == CardUsed) {
+            CardUseStruct card_use = data.value<CardUseStruct>();
+            card = card_use.card;
+        } else if (triggerEvent == CardResponded) {
+            card = data.value<CardResponseStruct>().m_card;
+        }
+
+        if (card == NULL || !card->isBlack()
+            || (card->getHandlingMethod() != Card::MethodUse && card->getHandlingMethod() != Card::MethodResponse))
+            return false;
+
+        QList<ServerPlayer *> targets;
+        foreach (ServerPlayer *tmp, room->getAlivePlayers()) {
+            if (player->inMyAttackRange(tmp))
+                targets << tmp;
+        }
+        if (targets.isEmpty()) return false;
+
+        ServerPlayer *target = room->askForPlayerChosen(player, targets, objectName(), "@sp_moonspear", true, true);
+        if (!target) return false;
+        room->setEmotion(player, "weapon/moonspear");
+        if (!room->askForCard(target, "jink", "@moon-spear-jink", QVariant(), Card::MethodResponse, player))
+            room->damage(DamageStruct(objectName(), player, target));
+        return false;
+    }
+};
+
+SPMoonSpear::SPMoonSpear(Suit suit, int number)
+    : Weapon(suit, number, 3)
+{
+    setObjectName("sp_moonspear");
+}
+
+SPCardPackage::SPCardPackage()
+    : Package("sp_cards")
+{
+    (new SPMoonSpear)->setParent(this);
+    skills << new SPMoonSpearSkill;
+
+    type = CardPack;
+}
+
+ADD_PACKAGE(SPCard)
+
+class MoonSpearSkill : public WeaponSkill
+{
+public:
+    MoonSpearSkill() : WeaponSkill("moon_spear")
+    {
+        events << CardUsed << CardResponded;
+    }
+
+    bool trigger(TriggerEvent triggerEvent, Room *room, ServerPlayer *player, QVariant &data) const
+    {
+        if (player->getPhase() != Player::NotActive)
+            return false;
+
+        const Card *card = NULL;
+        if (triggerEvent == CardUsed) {
+            CardUseStruct card_use = data.value<CardUseStruct>();
+            card = card_use.card;
+        } else if (triggerEvent == CardResponded) {
+            card = data.value<CardResponseStruct>().m_card;
+        }
+
+        if (card == NULL || !card->isBlack()
+            || (card->getHandlingMethod() != Card::MethodUse && card->getHandlingMethod() != Card::MethodResponse))
+            return false;
+
+        player->setFlags("MoonspearUse");
+        if (!room->askForUseCard(player, "slash", "@moon-spear-slash", -1, Card::MethodUse, false))
+            player->setFlags("-MoonspearUse");
+
+        return false;
+    }
+};
+
+MoonSpear::MoonSpear(Suit suit, int number)
+    : Weapon(suit, number, 3)
+{
+    setObjectName("moon_spear");
+}
+
+NosRendeCard::NosRendeCard()
+{
+    mute = true;
+    will_throw = false;
+    handling_method = Card::MethodNone;
+}
+
+void NosRendeCard::use(Room *room, ServerPlayer *source, QList<ServerPlayer *> &targets) const
+{
+    ServerPlayer *target = targets.first();
+
+    QDateTime dtbefore = source->tag.value("nosrende", QDateTime(QDate::currentDate(), QTime(0, 0, 0))).toDateTime();
+    QDateTime dtafter = QDateTime::currentDateTime();
+
+    if (dtbefore.secsTo(dtafter) > 3 * Config.AIDelay / 1000)
+        room->broadcastSkillInvoke("rende");
+
+    source->tag["nosrende"] = QDateTime::currentDateTime();
+
+    CardMoveReason reason(CardMoveReason::S_REASON_GIVE, source->objectName(), target->objectName(), "nosrende", QString());
+    room->obtainCard(target, this, reason, false);
+
+    int old_value = source->getMark("nosrende");
+    int new_value = old_value + subcards.length();
+    room->setPlayerMark(source, "nosrende", new_value);
+
+    if (old_value < 2 && new_value >= 2)
+        room->recover(source, RecoverStruct(source));
+}
+
+NostalgiaPackage::NostalgiaPackage()
+    : Package("nostalgia")
+{
+    type = CardPack;
+
+    Card *moon_spear = new MoonSpear;
+    moon_spear->setParent(this);
+
+    skills << new MoonSpearSkill;
+
+    addMetaObject<NosRendeCard>();
+}
+
+ADD_PACKAGE(Nostalgia)
+
+VSCrossbow::VSCrossbow(Suit suit, int number)
+    : Crossbow(suit, number)
+{
+    setObjectName("vscrossbow");
+}
+
+bool VSCrossbow::match(const QString &pattern) const
+{
+    QStringList patterns = pattern.split("+");
+    if (patterns.contains("crossbow"))
+        return true;
+    else
+        return Crossbow::match(pattern);
+}
+
+New3v3CardPackage::New3v3CardPackage()
+    : Package("New3v3Card")
+{
+    QList<Card *> cards;
+    cards << new SupplyShortage(Card::Spade, 1)
+        << new SupplyShortage(Card::Club, 12)
+        << new Nullification(Card::Heart, 12);
+
+    foreach(Card *card, cards)
+        card->setParent(this);
+
+    type = CardPack;
+}
+
+ADD_PACKAGE(New3v3Card)
+
+New3v3_2013CardPackage::New3v3_2013CardPackage()
+: Package("New3v3_2013Card")
+{
+    QList<Card *> cards;
+    cards << new VSCrossbow(Card::Club)
+        << new VSCrossbow(Card::Diamond);
+
+    foreach(Card *card, cards)
+        card->setParent(this);
+
+    type = CardPack;
+}
+
+ADD_PACKAGE(New3v3_2013Card)
+
+Drowning::Drowning(Suit suit, int number)
+    : SingleTargetTrick(suit, number)
+{
+    setObjectName("drowning");
+}
+
+bool Drowning::targetFilter(const QList<const Player *> &targets, const Player *to_select, const Player *Self) const
+{
+    int total_num = 1 + Sanguosha->correctCardTarget(TargetModSkill::ExtraTarget, Self, this);
+    return targets.length() < total_num && to_select != Self;
+}
+
+void Drowning::onEffect(const CardEffectStruct &effect) const
+{
+    Room *room = effect.to->getRoom();
+    if (!effect.to->getEquips().isEmpty()
+        && room->askForChoice(effect.to, objectName(), "throw+damage", QVariant::fromValue(effect)) == "throw")
+        effect.to->throwAllEquips();
+    else
+        room->damage(DamageStruct(this, effect.from->isAlive() ? effect.from : NULL, effect.to));
+}
+
+New1v1CardPackage::New1v1CardPackage()
+: Package("New1v1Card")
+{
+    QList<Card *> cards;
+    cards << new Duel(Card::Spade, 1)
+        << new EightDiagram(Card::Spade, 2)
+        << new Dismantlement(Card::Spade, 3)
+        << new Snatch(Card::Spade, 4)
+        << new Slash(Card::Spade, 5)
+        << new QinggangSword(Card::Spade, 6)
+        << new Slash(Card::Spade, 7)
+        << new Slash(Card::Spade, 8)
+        << new IceSword(Card::Spade, 9)
+        << new Slash(Card::Spade, 10)
+        << new Snatch(Card::Spade, 11)
+        << new Spear(Card::Spade, 12)
+        << new SavageAssault(Card::Spade, 13);
+
+    cards << new ArcheryAttack(Card::Heart, 1)
+        << new Jink(Card::Heart, 2)
+        << new Peach(Card::Heart, 3)
+        << new Peach(Card::Heart, 4)
+        << new Jink(Card::Heart, 5)
+        << new Indulgence(Card::Heart, 6)
+        << new ExNihilo(Card::Heart, 7)
+        << new ExNihilo(Card::Heart, 8)
+        << new Peach(Card::Heart, 9)
+        << new Slash(Card::Heart, 10)
+        << new Slash(Card::Heart, 11)
+        << new Dismantlement(Card::Heart, 12)
+        << new Nullification(Card::Heart, 13);
+
+    cards << new Duel(Card::Club, 1)
+        << new RenwangShield(Card::Club, 2)
+        << new Dismantlement(Card::Club, 3)
+        << new Slash(Card::Club, 4)
+        << new Slash(Card::Club, 5)
+        << new Slash(Card::Club, 6)
+        << new Drowning(Card::Club, 7)
+        << new Slash(Card::Club, 8)
+        << new Slash(Card::Club, 9)
+        << new Slash(Card::Club, 10)
+        << new Slash(Card::Club, 11)
+        << new SupplyShortage(Card::Club, 12)
+        << new Nullification(Card::Club, 13);
+
+    cards << new Crossbow(Card::Diamond, 1)
+        << new Jink(Card::Diamond, 2)
+        << new Jink(Card::Diamond, 3)
+        << new Snatch(Card::Diamond, 4)
+        << new Axe(Card::Diamond, 5)
+        << new Slash(Card::Diamond, 6)
+        << new Jink(Card::Diamond, 7)
+        << new Jink(Card::Diamond, 8)
+        << new Slash(Card::Diamond, 9)
+        << new Jink(Card::Diamond, 10)
+        << new Jink(Card::Diamond, 11)
+        << new Peach(Card::Diamond, 12)
+        << new Slash(Card::Diamond, 13);
+
+    foreach(Card *card, cards)
+        card->setParent(this);
+
+    type = CardPack;
+}
+
+ADD_PACKAGE(New1v1Card)
+
+class YitianSwordSkill : public WeaponSkill
+{
+public:
+    YitianSwordSkill() :WeaponSkill("yitian_sword")
+    {
+        events << DamageComplete << CardsMoveOneTime;
+    }
+
+    bool triggerable(const ServerPlayer *target) const
+    {
+        return target != NULL && target->isAlive();
+    }
+
+    bool trigger(TriggerEvent triggerEvent, Room *room, ServerPlayer *player, QVariant &data) const
+    {
+        if (triggerEvent == DamageComplete) {
+            if (WeaponSkill::triggerable(player) && player->getPhase() == Player::NotActive) {
+                room->askForUseCard(player, "slash", "@YitianSword-slash");
+            }
+        } else {
+            if (player->hasFlag("YitianSwordDamage")) {
+                CardsMoveOneTimeStruct move = data.value<CardsMoveOneTimeStruct>();
+                if (move.from != player || !move.from_places.contains(Player::PlaceEquip))
+                    return false;
+                for (int i = 0; i < move.card_ids.size(); i++) {
+                    if (move.from_places[i] != Player::PlaceEquip) continue;
+                    const Card *card = Sanguosha->getEngineCard(move.card_ids[i]);
+                    if (card->objectName() == objectName()) {
+                        player->setFlags("-YitianSwordDamage");
+                        ServerPlayer *target = room->askForPlayerChosen(player, room->getAlivePlayers(), "yitian_sword", "@YitianSword-lost", true, true);
+                        if (target != NULL)
+                            room->damage(DamageStruct("yitian_sword", player, target));
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+};
+
+YitianSword::YitianSword(Suit suit, int number)
+    :Weapon(suit, number, 2)
+{
+    setObjectName("yitian_sword");
+}
+
+void YitianSword::onUninstall(ServerPlayer *player) const
+{
+    if (player->isAlive() && player->getMark("Equips_Nullified_to_Yourself") == 0 && player->hasWeapon(objectName()))
+        player->setFlags("YitianSwordDamage");
+}
+
+YitianCardPackage::YitianCardPackage()
+    :Package("yitian_cards")
+{
+    (new YitianSword)->setParent(this);
+
+    type = CardPack;
+
+    skills << new YitianSwordSkill;
+}
+
+ADD_PACKAGE(YitianCard)
 
 Shit::Shit(Suit suit, int number)
     :BasicCard(suit, number)
@@ -152,7 +497,7 @@ void Deluge::takeEffect(ServerPlayer *target) const
             card_ids.removeOne(card_id);
 
             room->takeAG(player, card_id, false);
-            
+
             room->moveCardTo(Sanguosha->getCard(card_id), player, Player::PlaceHand, true);
         }
     }

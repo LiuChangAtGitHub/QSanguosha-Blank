@@ -1,7 +1,7 @@
-#include "wind.h"
+#include "aux-package.h"
 #include "engine.h"
-#include "clientplayer.h"
 #include "clientstruct.h"
+#include "clientplayer.h"
 #include "room.h"
 
 GuhuoDialog *GuhuoDialog::getInstance(const QString &object, bool left, bool right,
@@ -181,4 +181,20 @@ QAbstractButton *GuhuoDialog::createButton(const Card *card)
 
         return button;
     }
+}
+
+HuashenDialog::HuashenDialog()
+{
+    setWindowTitle(Sanguosha->translate("huashen"));
+}
+
+void HuashenDialog::popup()
+{
+    QVariantList huashen_list = Self->tag["Huashens"].toList();
+    QList<const General *> huashens;
+    foreach(QVariant huashen, huashen_list)
+        huashens << Sanguosha->getGeneral(huashen.toString());
+
+    fillGenerals(huashens);
+    show();
 }

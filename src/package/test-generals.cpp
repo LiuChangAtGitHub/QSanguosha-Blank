@@ -1,5 +1,6 @@
-#include "standard.h"
+#include "test-generals.h"
 #include "exppattern.h"
+#include "general.h"
 
 TestPackage::TestPackage()
     : Package("test")

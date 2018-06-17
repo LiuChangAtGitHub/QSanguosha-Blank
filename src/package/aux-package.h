@@ -1,7 +1,8 @@
-#ifndef _WIND_H
-#define _WIND_H
+#ifndef AUXPACKAGE_H
+#define AUXPACKAGE_H
 
 #include "card.h"
+#include "generaloverview.h"
 
 class GuhuoDialog : public QDialog
 {
@@ -37,5 +38,15 @@ signals:
     void onButtonClick();
 };
 
-#endif
+class HuashenDialog : public GeneralOverview
+{
+    Q_OBJECT
 
+public:
+    HuashenDialog();
+
+public slots:
+    void popup();
+};
+
+#endif // AUXPACKAGE_H

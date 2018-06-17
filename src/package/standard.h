@@ -5,14 +5,6 @@
 #include "card.h"
 #include "skill.h"
 
-class TestPackage : public Package
-{
-    Q_OBJECT
-
-public:
-    TestPackage();
-};
-
 class BasicCard : public Card
 {
     Q_OBJECT

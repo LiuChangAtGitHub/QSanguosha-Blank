@@ -5,7 +5,7 @@
 #include "standard.h"
 #include "playercarddialog.h"
 #include "roomscene.h"
-#include "wind.h"
+#include "aux-package.h"
 #include "clientplayer.h"
 #include "pixmapanimation.h"
 #include "timed-progressbar.h"

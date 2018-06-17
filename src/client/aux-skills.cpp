@@ -1,6 +1,6 @@
 #include "aux-skills.h"
 #include "clientplayer.h"
-#include "nostalgia.h"
+#include "ex-cards.h"
 #include "engine.h"
 #include "util.h"
 

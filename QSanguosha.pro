@@ -47,12 +47,9 @@ SOURCES += \
     src/dialog/scenario-overview.cpp \
     src/package/exppattern.cpp \
     src/package/maneuvering.cpp \
-    src/package/nostalgia.cpp \
     src/package/package.cpp \
     src/package/standard.cpp \
     src/package/standard-cards.cpp \
-    src/package/standard-generals.cpp \
-    src/package/wind.cpp \
     src/scenario/couple-scenario.cpp \
     src/scenario/miniscenarios.cpp \
     src/scenario/scenario.cpp \
@@ -96,17 +93,14 @@ SOURCES += \
     src/ui/table-pile.cpp \
     src/ui/timed-progressbar.cpp \
     src/ui/ui-utils.cpp \
-    src/package/joy.cpp \
-    src/package/mountain.cpp \
-    src/package/sp.cpp \
-    src/package/special1v1.cpp \
-    src/package/special3v3.cpp \
-    src/package/yitian.cpp \
     swig/sanguosha_wrap.cxx \
     src/dialog/banipdialog.cpp \
     src/dialog/mainwindowserverlist.cpp \
     src/dialog/dialogslsettings.cpp \
-    src/server/qtupnpportmapping.cpp
+    src/server/qtupnpportmapping.cpp \
+    src/package/ex-cards.cpp \
+    src/package/test-generals.cpp \
+    src/package/aux-package.cpp
 
 HEADERS += \
     src/client/aux-skills.h \
@@ -141,7 +135,6 @@ HEADERS += \
     src/dialog/scenario-overview.h \
     src/package/exppattern.h \
     src/package/maneuvering.h \
-    src/package/nostalgia.h \
     src/package/package.h \
     src/package/standard.h \
     src/package/standard-equips.h \
@@ -180,12 +173,6 @@ HEADERS += \
     src/util/recorder.h \
     src/util/socket.h \
     src/core/record-analysis.h \
-    src/package/joy.h \
-    src/package/mountain.h \
-    src/package/sp.h \
-    src/package/special1v1.h \
-    src/package/special3v3.h \
-    src/package/yitian.h \
     src/core/room-state.h \
     src/core/wrapped-card.h \
     src/ui/bubblechatbox.h \
@@ -195,13 +182,15 @@ HEADERS += \
     src/ui/table-pile.h \
     src/ui/timed-progressbar.h \
     src/ui/ui-utils.h \
-    src/package/wind.h \
     src/dialog/banipdialog.h \
     src/pch.h \
     src/dialog/mainwindowserverlist.h \
     src/dialog/dialogslsettings.h \
     src/core/defines.h \
-    src/server/qtupnpportmapping.h
+    src/server/qtupnpportmapping.h \
+    src/package/ex-cards.h \
+    src/package/test-generals.h \
+    src/package/aux-package.h
 
 FORMS += \
     src/dialog/cardoverview.ui \
