@@ -1177,6 +1177,7 @@ void Snatch::onEffect(const CardEffectStruct &effect) const
     bool using_2013 = (room->getMode() == "02_1v1" && Config.value("1v1/Rule", "2013").toString() != "Classical");
     QString flag = using_2013 ? "he" : "hej";
     int card_id = room->askForCardChosen(effect.from, effect.to, flag, objectName());
+    if (card_id == Card::S_UNKNOWN_CARD_ID) return ;
     CardMoveReason reason(CardMoveReason::S_REASON_EXTRACTION, effect.from->objectName());
     room->obtainCard(effect.from, Sanguosha->getCard(card_id), reason, room->getCardPlace(card_id) != Player::PlaceHand);
 }
@@ -1223,6 +1224,7 @@ void Dismantlement::onEffect(const CardEffectStruct &effect) const
             card_id = room->askForCardChosen(effect.from, effect.to, "h", objectName(), true, Card::MethodDiscard);
         }
     }
+    if (card_id == Card::S_UNKNOWN_CARD_ID) return ;
     room->throwCard(card_id, room->getCardPlace(card_id) == Player::PlaceDelayedTrick ? NULL : effect.to, effect.from);
 }
 
@@ -1304,10 +1306,12 @@ public:
             room->setEmotion(player, "weapon/ice_sword");
             if (damage.from->canDiscard(damage.to, "he")) {
                 int card_id = room->askForCardChosen(player, damage.to, "he", "ice_sword", false, Card::MethodDiscard);
+                if (card_id == Card::S_UNKNOWN_CARD_ID) return false;
                 room->throwCard(Sanguosha->getCard(card_id), damage.to, damage.from);
 
                 if (damage.from->isAlive() && damage.to->isAlive() && damage.from->canDiscard(damage.to, "he")) {
                     card_id = room->askForCardChosen(player, damage.to, "he", "ice_sword", false, Card::MethodDiscard);
+                    if (card_id == Card::S_UNKNOWN_CARD_ID) return true;
                     room->throwCard(Sanguosha->getCard(card_id), damage.to, damage.from);
                 }
             }
