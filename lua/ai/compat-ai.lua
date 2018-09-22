@@ -659,6 +659,10 @@ function DimengIsWorth(self, friend, enemy, mycards, myequips)
 	return true
 end
 
+function hasBuquEffect(player)
+    return false
+end
+
 function hasManjuanEffect(player)
 	return false
 end
