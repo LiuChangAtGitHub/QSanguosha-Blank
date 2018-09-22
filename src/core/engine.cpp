@@ -218,6 +218,8 @@ Engine::Engine(bool isManualMode)
 
     if (!DoLuaScript(lua, "lua/sanguosha.lua")) exit(1);
 
+    addPackage("Test");
+
     if (isManualMode) {
         ManualSkillList allSkills;
         foreach (const General *general, getAllGenerals()) {

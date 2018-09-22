@@ -35,9 +35,7 @@ config = {
 		"YitianCard",
 	--	"Joy",
 		"Disaster",
-		"JoyEquip",
-
-		"Test"
+		"JoyEquip"
 	},
 	
 	kof_classical_generals = {
